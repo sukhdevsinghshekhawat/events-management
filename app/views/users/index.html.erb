@@ -1,0 +1,26 @@
+<h2>All Users</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td>
+          <%= link_to "Show", user_path(user), class: "btn btn-sm btn-primary" %>
+          <%= link_to "Edit", edit_user_path(user), class: "btn btn-sm btn-warning" %>
+          <%= link_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

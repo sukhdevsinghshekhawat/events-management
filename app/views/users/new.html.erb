@@ -1,0 +1,36 @@
+<div class="auth-card">
+  <h2>Create your account</h2>
+
+  <%= form_with(model: @user, local: true, data: { turbo: false }) do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: "Your name" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: "you@college.edu" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :role %>
+      <%= f.select :role, options_for_select(["Student", "student"]), {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: "Password (min 6 chars)" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, placeholder: "Confirm password" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Sign up", class: "btn" %>
+    </div>
+  <% end %>
+
+  <p class="small">Already have account? <%= link_to "Login", login_path %></p>
+</div>

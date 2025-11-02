@@ -1,0 +1,272 @@
+/* ===========================
+   General Body & Layout
+=========================== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f4f7f6;
+  color: #222;
+  margin: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* ===========================
+   Top Navigation
+=========================== */
+/* Topbar Styles */
+.topbar {
+  background: #2c3e50;   /* dark blue-gray */
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Nav inside Topbar */
+.topbar .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand Name */
+.topbar .brand {
+  color: #ecf0f1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.topbar .brand:hover {
+  color: #1abc9c;  /* green hover */
+}
+
+/* Nav Links Container */
+.topbar .nav-links {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav Items */
+.topbar .nav-item {
+  list-style: none;
+}
+
+/* Links */
+.topbar .nav-link {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.topbar .nav-link:hover {
+  background: #1abc9c;
+  color: #fff;
+}
+
+/* Responsive (Mobile View) */
+@media (max-width: 768px) {
+  .topbar .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar .nav-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .topbar .nav-link {
+    display: block;
+    width: 100%;
+  }
+}
+
+
+
+/* ===========================
+   Flash Messages
+=========================== */
+.flash {
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.flash.notice {
+  background-color: #e6fffa;
+  color: #065f46;
+  border: 1px solid #bdeedd;
+}
+
+.flash.alert {
+  background-color: #fff1f2;
+  color: #9f1239;
+  border: 1px solid #fbc4d1;
+}
+
+/* ===========================
+   Auth Pages (Signup/Login)
+=========================== */
+.auth-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(15,23,42,0.08);
+  padding: 30px 25px;
+  max-width: 480px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #0f172a;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-actions {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.btn {
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background: #1e293b;
+}
+
+.small {
+  font-size: 13px;
+  color: #555;
+  margin-top: 12px;
+}
+
+/* ===========================
+   Profile Card
+=========================== */
+.profile-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(15,23,42,0.08);
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.profile-card h2 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+/* ===========================
+   Events Table / List
+=========================== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(15,23,42,0.08);
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background: #0f172a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.table tr:hover {
+  background: #f1f5f9;
+}
+
+/* ===========================
+   Event Show Page
+=========================== */
+#announcements, #messages {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#announcements p, #messages p {
+  margin: 6px 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.05);
+}
+
+#announcements h3, #messages h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+/* Announcement form / Chat form */
+#messages form, #announcements form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#messages input[type="text"], #announcements textarea {
+  flex: 1;
+  padding: 1
+}

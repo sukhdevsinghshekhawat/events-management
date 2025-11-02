@@ -1,0 +1,5 @@
+<h2>Profile</h2>
+<p><strong>Name:</strong> <%= @user.name %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Role:</strong> <%= @user.role&.capitalize || "N/A" %></p>
+<%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-warning" %>

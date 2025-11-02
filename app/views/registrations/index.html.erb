@@ -1,0 +1,24 @@
+<h2>Participants for <%= @event.title %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>rtu_roll_no</th>
+      <th>semester</th>
+      <th>mobile_no</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registrations.each do |registration| %>
+      <tr>
+        <td> <p><strong>Name:</strong> <%= registration.user.name %></p></td>
+        <td> <p><strong>Email:</strong> <%= registration.user.email %></p></td>
+        <td> <p><strong>Roll No:</strong> <%= registration.rtu_roll_no %></p>
+        <td> <p><strong>Semester:</strong> <%= registration.semester %></p></td>
+        <td> <p><strong>Mobile:</strong> <%= registration.mobile_no %></p></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

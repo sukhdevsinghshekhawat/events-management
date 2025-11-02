@@ -1,0 +1,9 @@
+teacher_one:
+  name: "John Doe"
+  email: "teacher1@example.com"
+  password_digest: <%= BCrypt::Password.create('password') %>
+
+teacher_two:
+  name: "Jane Smith"
+  email: "teacher2@example.com"
+  password_digest: <%= BCrypt::Password.create('password') %>

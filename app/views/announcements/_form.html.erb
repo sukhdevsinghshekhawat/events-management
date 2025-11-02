@@ -1,0 +1,6 @@
+<%= form_with(model: [event, Announcement.new], local: true) do |f| %>
+  <div class="mb-2">
+    <%= f.text_area :message, placeholder: "Write announcement...", class: "form-control", rows: 2 %>
+  </div>
+  <%= f.submit "Post Announcement", class: "btn btn-primary" %>
+<% end %>

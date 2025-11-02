@@ -1,0 +1,6 @@
+<%= form_with(model: [event, Message.new], local: true, id: "new_message_form") do |f| %>
+  <div class="input-group my-2">
+    <%= f.text_field :content, placeholder: "Type a message...", class: "form-control", autocomplete: "off", id: "message_content" %>
+    <button class="btn btn-primary" id="send_message_btn" type="submit">Send</button>
+  </div>
+<% end %>

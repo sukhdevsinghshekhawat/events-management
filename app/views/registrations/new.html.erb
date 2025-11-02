@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Event Registration</h3>
+
+  <%= form_with(model: [@event, @registration], local: true, data: { turbo: false }) do |form| %>
+    <%= render "shared/form_errors", object: @registration %>
+    <!-- RTU Roll No -->
+    <div class="mb-3">
+      <%= form.label :rtu_roll_no, "RTU Roll No", class: "form-label" %>
+      <%= form.text_field :rtu_roll_no, class: "form-control", placeholder: "Enter your RTU Roll No like 24CMSXX642" %>
+    </div>
+
+    <!-- Semester -->
+    <div class="mb-3">
+      <%= form.label :semester, class: "form-label" %>
+      <%= form.select :semester, 
+            ["MCA-1","MCA-2","MCA-3","MCA-4","BCA-1","BCA-2","BCA-3","BCA-4", "MBA"], 
+            { prompt: "Select Semester" }, 
+            { class: "form-select" } %>
+    </div>
+
+    <!-- Mobile Number -->
+    <div class="mb-3">
+      <%= form.label :mobile_no, "Mobile Number", class: "form-label" %>
+      <%= form.telephone_field :mobile_no, class: "form-control", placeholder: "Enter your mobile number" %>
+    </div>
+
+    <!-- Submit -->
+    <div class="d-grid">
+      <%= form.submit "Register", class: "btn btn-success" %>
+    </div>
+
+  <% end %>
+</div>
