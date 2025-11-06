@@ -14,12 +14,37 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
-      flash[:notice] = "Account created!"
-      redirect_to @user
+      UserMailer.verification_email(@user).deliver_now
+      flash[:notice] = "Account created! Check your email to verify your account."
+      redirect_to login_path
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
-      render :new
+      render :new, status: :unprocessable_content
+    end
+  end
+
+  def google_auth
+    auth = request.env['omniauth.auth']
+    user = User.find_or_create_by(provider: auth['provider'], uid: auth['uid']) do |u|
+      u.name  = auth['info']['name']
+      u.email = auth['info']['email']
+      u.password = SecureRandom.hex(10)  
+    end
+
+    session[:user_id] = user.id
+    flash[:notice] = "Signed in with Google!"
+    redirect_to root_path
+  end
+
+  def verify_email
+    user = User.find_by(verification_token: params[:token])
+    if user.present?
+      user.update(email_verified: true, verification_token: nil)
+      flash[:notice] = "Your email has been verified successfully!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Invalid or expired verification link."
+      redirect_to login_path
     end
   end
 
@@ -47,12 +72,10 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
-  end
+    def set_user
+      @user = User.find(params[:id])
+    end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
+    end
 end

@@ -1,0 +1,51 @@
+<div class="auth-card">
+  <p>Welcome, <%= current_super_admin.name %> 👑</p>
+  <%= link_to "Create New Admin", new_superadmin_admin_path, class: "btn btn-primary" %>
+</div>
+<hr>
+<h3>All Users</h3>
+<table class="table">
+  <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td>
+          <% unless user.super_admin? %>
+            <%= button_to "Delete", superadmin_delete_user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<h3>All Events</h3>
+<ul>
+  <% @events.each do |e| %>
+    <li><%= e.title %> 
+      <%= button_to "Delete", superadmin_delete_event_path(e), method: :delete, data: { confirm: "Delete this event?" }, class: "btn btn-danger btn-sm" %>
+    </li>
+  <% end %>
+</ul>
+<hr>
+<h4>All Announcements</h4>
+<ul>
+  <% @announcements.each do |a| %>
+    <li><%= a.message %> - <%= a.user.name %>
+      <%= button_to "Delete", superadmin_delete_announcement_path(a), method: :delete, data: { confirm: "Delete this announcement?" }, class: "btn btn-danger btn-sm" %>
+    </li>
+  <% end %>
+</ul>
+<hr>
+<h4>All Messages</h4>
+<ul>
+  <% @messages.each do |m| %>
+    <li><%= m.user.name %>: <%= m.content %>
+      <%= button_to "Delete", superadmin_delete_message_path(m), method: :delete, data: { confirm: "Delete this message?" }, class: "btn btn-danger btn-sm" %>
+    </li>
+  <% end %>
+</ul>
+<hr>

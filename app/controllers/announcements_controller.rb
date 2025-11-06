@@ -27,12 +27,15 @@ class AnnouncementsController < ApplicationController
   end
 
   private
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
 
-  def set_event
-    @event = Event.find(params[:event_id])
-  end
+    def announcement_params
+      params.require(:announcement).permit(:message)
+    end
 
-  def announcement_params
-    params.require(:announcement).permit(:message)
-  end
+    def require_teacher
+      redirect_to root_path unless current_user.role == "admin" || current_user.role == "teacher"
+    end
 end

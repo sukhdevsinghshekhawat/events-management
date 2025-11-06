@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_action :set_event
 
   def index
-    @messages = @event.messages.order(created_at: :asc)
+    @messages = @event.messages.order(created_at: :desc)
     render json: @messages.as_json(include: { user: { only: :name } }, only: [:id, :content, :created_at])
   end
 
@@ -15,9 +15,9 @@ class MessagesController < ApplicationController
         id: @message.id,
         user: current_user.name,
         content: @message.content,
-        created_at: @message.created_at.strftime("%H:%M")
+        created_at: @message.created_at.in_time_zone('Asia/Kolkata').strftime("%I:%M %p")
       })
-      head :ok
+      redirect_to @event 
     else
       render json: { error: @message.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end

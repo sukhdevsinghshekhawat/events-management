@@ -24,7 +24,7 @@ class RegistrationsController < ApplicationController
       flash[:notice] = "Registered successfully!"
       redirect_to @event
     else
-      render :new
+      render :new, status: :unprocessable_content
     end
   end
 
