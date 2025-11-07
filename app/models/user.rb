@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :events, through: :registrations
   after_initialize :set_default_role, if: :new_record?
   before_create :generate_verification_token
-  
+
   def super_admin?
     role == "super_admin"
   end
@@ -25,10 +25,7 @@ class User < ApplicationRecord
       self.verification_token = SecureRandom.hex(10)
       self.email_verified = false
     end
-
     def downcase_email
       self.email = email.downcase
     end
-
-    
 end

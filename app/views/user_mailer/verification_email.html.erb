@@ -1,5 +1,5 @@
 <h2>Welcome to College Events!</h2>
 <p>Hi <%= @user.name %>,</p>
 <p>Thanks for signing up. Please verify your email address by clicking the link below:</p>
-<p><%= link_to "Verify My Email", @url %></p>
+<p><%= link_to 'Verify your email', "#{root_url.chomp('/')}#{@url}" %></p>
 <p>This link will expire in 24 hours.</p>
