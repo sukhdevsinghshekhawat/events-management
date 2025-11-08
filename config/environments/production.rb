@@ -72,22 +72,36 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :smtp
+  config.cache_classes = true
+  config.eager_load = true
+  config.consider_all_requests_local = false
 
+  config.action_mailer.default_url_options = { host: 'https://college-events.onrender.com', protocol: 'https' }
+
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              "smtp.gmail.com",
-    port:                 587,
-    domain:               "gmail.com",
+    address:              ENV.fetch("EMAIL_ADDRESS", "smtp.gmail.com"),
+    port:                 ENV.fetch("EMAIL_PORT", 587),
+    domain:               ENV.fetch("EMAIL_DOMAIN", "gmail.com"),
     user_name:            ENV["EMAIL_USER"],
     password:             ENV["EMAIL_PASS"],
     authentication:       "plain",
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    open_timeout:         10,
+    read_timeout:         10
   }
 
-  config.action_mailer.default_url_options = {
-    host: "college-events.onrender.com",
-    protocol: "https"
+  config.action_mailer.default_options = {
+    from: ENV["EMAIL_USER"]
   }
+
+  config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
+
+  # static assets (important for render)
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.assets.compile = false
+  config.log_level = :info
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
