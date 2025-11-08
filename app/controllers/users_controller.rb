@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       flash.now[:alert] = @user.errors.full_messages.join(", ")
-      render :new, status: :unprocessable_content
+      render :new
     end
   end
 
@@ -41,10 +41,11 @@ class UsersController < ApplicationController
     if user.present?
       user.update(email_verified: true, verification_token: nil)
       flash[:notice] = "Your email has been verified successfully!"
-      redirect_to root_path
-    else
-      flash[:alert] = "Invalid or expired verification link."
       redirect_to login_path
+    else
+
+      flash[:alert] = "Invalid or expired verification link."
+      redirect_to root_path
     end
   end
 
